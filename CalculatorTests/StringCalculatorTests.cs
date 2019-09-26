@@ -24,6 +24,11 @@ namespace CalculatorTests
         [DataRow("18446744073709551615,18446744073709551615,18446744073709551615,18446744073709551615", 0)] //input higher than lmax long value
         [DataRow("-4,-4,-5,-3", -16)] //negative numbers
         [DataRow("(*(<,*(*)(,900,)(*)(", 900)] //single valid input
+        [DataRow("1,2\n3,4,5\n6\n7,8\n9,10\n11,12", 78)] //mix of commas and new line char
+        [DataRow("12312\ndsfs\nadf\nadsfas2f\nadf2fsda\nadfc\n&^*", 12312)] // all new line char delimiters
+        [DataRow(",\n,\n,\n,5\n,\n", 5)] //both delimiters together
+        [DataRow("\n\n\n1\n\n", 1)] //Single valid number between new line delimiters
+
         public void Add_Tests(string input, int expected)
         {
             var actual = calculator.Add(input);
