@@ -9,23 +9,15 @@ namespace Calculator
     public class StringCalculator
     {      
 
-        public int Add(string input)
+        public long Add(string input)
         {
-            int sum = 0;
-            int count = 0;
+            long sum = default;
 
             var numbers = input.Split(',');
 
             foreach(var num in numbers)
             {
-                count++;
-
-                if(count > 2)
-                {
-                    break;
-                }
-
-                if(int.TryParse(num, out int result))
+                if(long.TryParse(num, out long result))
                 {
                     sum += result;
                 }

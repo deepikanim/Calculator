@@ -12,9 +12,9 @@ namespace Calculator
         {
             var calculator = new StringCalculator();
 
-            do
+            while(true)
             {
-                Console.WriteLine("\nEnter 1 or 2 numbers (separated by comma(,)).");
+                Console.WriteLine("\nEnter numbers separated by comma(,) :");
 
                 var input = Console.ReadLine();
 
@@ -22,7 +22,6 @@ namespace Calculator
 
                 Console.WriteLine($"Sum is : {sum}");
             }
-            while (true);
 
                          
         }

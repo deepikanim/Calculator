@@ -16,18 +16,18 @@ namespace CalculatorTests
         }
 
         [DataTestMethod]
-        [DataRow("2,5",7)] //basic positive test case
-        [DataRow("@,@",0)] //both numbers invalid inputs
-        [DataRow("2312,*&^*&", 2312)] //2nd entry invalid input
-        [DataRow("&^*,222", 222)] // first entry invalid input
-        [DataRow(" , ", 0)] // space for both inputs
-        [DataRow("2,2,2,2", 4)] //more than 2 inputs
-        [DataRow("-4,-4", -8)] //negative numbers
-        [DataRow("(*(<,*(*)(,900,)(*)(", 0)] //more than 2 invalid entries and number after 2
+        [DataRow("1,2,3,4,5,6,7,8,9,10,11,12", 78)] //basic positive test case
+        [DataRow("@,@,(*,*,)(*,)(*0,*&,KJHK,kjhkjh,jhkj", 0)] //all inputs are invalid
+        [DataRow("23asdf,sdf12,*&,^*&,asdf,#!#!<,$@#@,FSDS,()*)(,2147483647", 2147483647)] //last input is valid 
+        [DataRow("12312,dsfs,adf,adsfas2f,adf2fsda,adfc,&^*", 12312)] // all values invalid expect first
+        [DataRow(" , , , , , , , , ,", 0)] // space for all inputs
+        [DataRow("18446744073709551615,18446744073709551615,18446744073709551615,18446744073709551615", 0)] //input higher than lmax long value
+        [DataRow("-4,-4,-5,-3", -16)] //negative numbers
+        [DataRow("(*(<,*(*)(,900,)(*)(", 900)] //single valid input
         public void Add_Tests(string input, int expected)
         {
             var actual = calculator.Add(input);
-            Assert.AreEqual(actual, expected);
+            Assert.AreEqual(expected, actual);
         }
     }
 }
