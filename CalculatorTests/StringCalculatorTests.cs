@@ -34,6 +34,15 @@ namespace CalculatorTests
         [DataRow("///\n5,5/5/5", 20)] // "/" as custom delimter
         [DataRow("//D\n5D5D5d5", 10)] //alphabet as delimiter and check case
         [DataRow("//-\n--3-3\n3,3", 12)] //negative sign as delimiter (should not throw exception for negative number)
+        [DataRow("//[\n5[8", 13)] // "[" should be supported as single character delimiter
+        [DataRow("//[%]\n5,6%7\n", 18)] // old delimiter still supported and single character delimiter can be give in new format
+        [DataRow("//[!!!]\n5,7,\n!!!8,!!5,!!!7!4", 20)] //delimiter with multiple special characters
+        [DataRow("//[1000]\n5100061000,7\n8", 26)] //higest supported number as delimter
+        [DataRow("//[0]\n500500", 10)] //zero delimiter 
+        [DataRow("//[00]\n500050050", 60)] // double zero delimiter identified
+        [DataRow("//[0@g]\n6,5\n450@g", 56)] // mixture of delimiter with number, spl char, alphabet
+        [DataRow("//[,]\n5,5\n,5", 15)] //existing delimiter 
+        [DataRow("//[\n]\n5,5\n,5", 15)] //existing delimiter 
         public void Add_Tests(string input, int expected)
         {
             var actual = calculator.Add(input);

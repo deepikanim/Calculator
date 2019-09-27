@@ -10,7 +10,7 @@ namespace Calculator
             var delimiters = GetDelimiters(input);
 
             var numbers = input
-                            .Split(delimiters)
+                            .Split(delimiters, StringSplitOptions.None)
                             .Select(s =>
                             {
                                 return long.TryParse(s.Trim(), out long i) ? i : 0;
@@ -26,10 +26,10 @@ namespace Calculator
             return numbers.FindAll(a => a <= 1000).Sum();
         }
 
-        private char[] GetDelimiters(string input)
+        private string[] GetDelimiters(string input)
         {
             int startIndex = input.IndexOf("//");
-            int endIndex = input.IndexOf('\n');
+            int endIndex = input.IndexOf("\n");
 
             string delimiter = null;
             if (startIndex >= 0 && endIndex >= 0)
@@ -38,11 +38,16 @@ namespace Calculator
             }
             if (!string.IsNullOrWhiteSpace(delimiter))
             {
-                return new char[] { ',', '\n', Convert.ToChar(delimiter) };
+                if(delimiter.Contains("[") && delimiter.Contains("]"))
+                {
+                    delimiter = delimiter.Trim('[', ']');
+                }
+               
+                return new string[] { ",", "\n", delimiter };
             }
             else
             {
-                return new char[] { ',', '\n' };
+                return new string[] { ",", "\n" };
             }
         }
 
