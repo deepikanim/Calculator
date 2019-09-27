@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Calculator
@@ -17,6 +18,7 @@ namespace Calculator
                 Console.WriteLine("\nEnter numbers:");
 
                 var input = Console.ReadLine();
+                input = Regex.Unescape(input);                
 
                 try
                 {
@@ -26,7 +28,7 @@ namespace Calculator
                 }
                 catch(Exception ex)
                 {
-                    Console.WriteLine(ex.Message);
+                    Console.WriteLine($"\nError: {ex.Message}");
                 }
                 
             }

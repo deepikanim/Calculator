@@ -29,7 +29,11 @@ namespace CalculatorTests
         [DataRow("\n\n\n1\n\n", 1)] //Single valid number between new line delimiters
         [DataRow("\n1001\n1001\n1001\n1001\n", 0)] //all numbers boundary value
         [DataRow("\n1001\n1000\n1000\n1001\n", 2000)] //first and last number boundary value 1001
-
+        [DataRow("//&\n5,5&7", 17)] //basic positive case for custom delimiter (special character)
+        [DataRow("//6\n6,6\n6,6,6\n6,7", 7)] //number as custom delimiter
+        [DataRow("///\n5,5/5/5", 20)] // "/" as custom delimter
+        [DataRow("//D\n5D5D5d5", 10)] //alphabet as delimiter and check case
+        [DataRow("//-\n--3-3\n3,3", 12)] //negative sign as delimiter (should not throw exception for negative number)
         public void Add_Tests(string input, int expected)
         {
             var actual = calculator.Add(input);
@@ -42,6 +46,7 @@ namespace CalculatorTests
         [DataRow("0,-0,4,2,-9\n7\n-9,100", "Negative numbers not allowed: -9,-9")] //zero should not show up in negative number
         [DataRow("-,-,-,2,9\n7\n9,-100", "Negative numbers not allowed: -100")] //single negative number last number
         [DataRow("-100,-,-,-,2,9\n7\n9,", "Negative numbers not allowed: -100")] //single negative number first number
+        [DataRow("//g\n-3,3\n-7g2323g-3,2", "Negative numbers not allowed: -3,-7,-3")] //negative number exception thrown with single custom delimiter
 
         public void Add_NegativeNumbers(string input, string expectedmessage)
         {
