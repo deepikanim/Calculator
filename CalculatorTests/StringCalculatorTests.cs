@@ -43,6 +43,10 @@ namespace CalculatorTests
         [DataRow("//[0@g]\n6,5\n450@g", 56)] // mixture of delimiter with number, spl char, alphabet
         [DataRow("//[,]\n5,5\n,5", 15)] //existing delimiter 
         [DataRow("//[\n]\n5,5\n,5", 15)] //existing delimiter 
+        [DataRow("//[1][2][3][4][5][6][7][8][9]\n5,5\n,500,3,0\n0,4", 0)] //every number is a delimiter except 0, result should always be 0
+        [DataRow("//[!!][&&][QaQ][1000]\n2!!3&&4QaQ51000,5QAQ,5!,6&",14)] // mutiple types of delimiters
+        [DataRow("//[,][\n]\n2,2\n2j\n2",6)]  //existing delimiter as custom delimiter
+        [DataRow("//[\r]\n6\r6",12)]//cr character test
         public void Add_Tests(string input, int expected)
         {
             var actual = calculator.Add(input);
