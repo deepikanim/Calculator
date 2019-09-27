@@ -29,7 +29,7 @@ namespace Calculator
                 throw new ArgumentException($"Negative numbers not allowed: {string.Join(",", negatives)}");
             }
 
-            return numbers.Sum();
+            return numbers.FindAll(a => a <= 1000).Sum();
         }
 
     }
