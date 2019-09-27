@@ -22,6 +22,13 @@ namespace Calculator
                                 return long.TryParse(s.Trim(), out long i) ? i : 0;
                             }).ToList();
 
+            var negatives = numbers.FindAll(a => a < 0);
+
+            if (negatives.Count > 0)
+            {
+                throw new ArgumentException($"Negative numbers not allowed: {string.Join(",", negatives)}");
+            }
+
             return numbers.Sum();
         }
 

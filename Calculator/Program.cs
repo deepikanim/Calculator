@@ -14,15 +14,22 @@ namespace Calculator
 
             while(true)
             {
-                Console.WriteLine("\nEnter numbers separated by comma(,) :");
+                Console.WriteLine("\nEnter numbers:");
 
                 var input = Console.ReadLine();
 
-                var sum = calculator.Add(input);
+                try
+                {
+                    var sum = calculator.Add(input);
 
-                Console.WriteLine($"Sum is : {sum}");
+                    Console.WriteLine($"Sum is : {sum}");
+                }
+                catch(Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+                
             }
-
                          
         }
     }
